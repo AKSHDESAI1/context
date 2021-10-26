@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+        .context-menu {
+            position: absolute;
+            text-align: center;
+            background: lightgray;
+            border: 1px solid black;
+        }
+
+        .context-menu ul {
+            padding: 0px;
+            margin: 0px;
+            min-width: 150px;
+            list-style: none;
+        }
+
+        .context-menu ul li {
+            padding-bottom: 7px;
+            padding-top: 7px;
+            border: 1px solid orange;
+        }
+
+        .context-menu ul li a {
+            text-decoration: none;
+            color: green;
+        }
+
+        .context-menu ul li:hover {
+            background: cyan;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 style="text-align: center;">
+        Welcome to GeeksforGeeks.
+    </h1>
+    <h1 style="text-align: center;">
+        Hi, We are creating a
+        custom context menu here.
+    </h1>
+
+    <div id="contextMenu" class="context-menu" style="display:none">
+        <ul>
+            <li onclick="orange()" style="cursor:pointer;"> <span> Orange </span> </li>
+            <li onclick="blue()" style="cursor:pointer;"> <span> Blue </span> </li>
+            <li onclick="red()" style="cursor:pointer;"> <span> Red </span> </li>
+            <li onclick="green()" style="cursor:pointer;"> <span> green </span> </li>
+            <li onclick="yellow()" style="cursor:pointer;"> <span> yellow </span> </li>
+            <script>
+                function orange() {
+                    document.body.style.backgroundColor = 'orange';
+                }
+                function blue() {
+                    document.body.style.backgroundColor = 'blue';
+                }
+                function red(){
+                    document.body.style.backgroundColor = 'red';
+                }
+
+                function green(){
+                    document.body.style.backgroundColor = 'green';
+                }
+
+                function yellow(){
+                    document.body.style.backgroundColor = 'yellow';
+                }
+
+
+
+                /* Get the element you want displayed in fullscreen */
+                var elem = document.documentElement;
+
+                /* Function to open fullscreen mode */
+                function openFullscreen() {
+                    if (elem.requestFullscreen) {
+                        elem.requestFullscreen();
+                    } else if (elem.mozRequestFullScreen) { /* Firefox */
+                        elem.mozRequestFullScreen();
+                    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                        elem.webkitRequestFullscreen();
+                    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                        elem = window.top.document.body; //To break out of frame in IE
+                        elem.msRequestFullscreen();
+                    }
+                }
+
+                /* Function to close fullscreen mode */
+                function closeFullscreen() {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        window.top.document.msExitFullscreen();
+                    }
+                }
+
+
+
+
+            </script>
+
+        </ul>
+    </div>
+
+    <script>
+        document.onclick = hideMenu;
+        document.oncontextmenu = rightClick;
+
+        function hideMenu() {
+            document.getElementById(
+                "contextMenu").style.display = "none"
+        }
+
+        function rightClick(e) {
+            e.preventDefault();
+
+            if (document.getElementById(
+                "contextMenu").style.display == "block")
+                hideMenu();
+            else {
+                var menu = document
+                    .getElementById("contextMenu")
+
+                menu.style.display = 'block';
+                menu.style.left = e.pageX + "px";
+                menu.style.top = e.pageY + "px";
+            }
+        }
+    </script>
+</body>
+
+</html>
